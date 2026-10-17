@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090909">
+<title>RedPanel — Control Center</title>
+<style>
+:root{--bg:#080808;--panel:#121212;--panel2:#191919;--red:#dc143c;--red2:#ff3157;--muted:#9b9b9b;--line:#2a2a2a;--text:#f5f5f5}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 90% 0%,#300712 0,transparent 38%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
+button,input{font:inherit}button{cursor:pointer}.layout{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100vh}
+aside{background:#0b0b0b;border-right:1px solid var(--line);padding:24px 16px;display:flex;flex-direction:column;gap:25px;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:12px;padding:0 10px}.brandmark{width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,#ff3157,#8d001d);display:grid;place-items:center;font-weight:950;box-shadow:0 0 24px #dc143c40}.brand strong{font-size:17px;letter-spacing:1.5px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;margin-top:3px}
+.section-label{font-size:10px;letter-spacing:2px;color:#696969;padding:0 12px;margin-bottom:8px}.nav{display:grid;gap:6px}.nav button{border:1px solid transparent;color:#aaa;background:transparent;text-align:left;padding:13px 14px;border-radius:12px;display:flex;align-items:center;gap:12px}.nav button:hover,.nav button.active{background:#291016;color:#fff;border-color:#4a1722}.nav button.active .ico{color:var(--red2}.ico{width:20px;text-align:center;font-size:17px}.side-bottom{margin-top:auto;border:1px solid var(--line);background:#111;border-radius:15px;padding:15px}.online{font-size:11px;color:#9de3b1;display:flex;gap:8px;align-items:center}.dot{width:7px;height:7px;border-radius:50%;background:#45d483;box-shadow:0 0 9px #45d483}.side-bottom p{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:0}
+main{padding:30px clamp(16px,4vw,52px) 50px;max-width:1500px;width:100%;margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:30px}.eyebrow{color:var(--red2);font-size:10px;letter-spacing:2.6px;font-weight:800}.topbar h1{font-size:clamp(24px,3vw,34px);margin:8px 0 0;letter-spacing:-.8px}.top-actions{display:flex;align-items:center;gap:10px}.pill{border:1px solid var(--line);border-radius:12px;background:#121212;color:#ddd;padding:10px 13px;font-size:12px}.avatar{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#2c1018;border:1px solid #642033;font-weight:800}
+.hero{position:relative;overflow:hidden;border:1px solid #4a1825;border-radius:22px;background:linear-gradient(115deg,#220b12 0%,#151012 52%,#111 100%);padding:clamp(22px,4vw,38px);margin-bottom:20px}.hero:after{content:"RP";position:absolute;right:4%;top:-36px;font-weight:1000;font-size:clamp(130px,23vw,260px);letter-spacing:-18px;color:#fff;opacity:.025;pointer-events:none}.hero .tag{display:inline-flex;align-items:center;gap:8px;border:1px solid #662035;background:#310e19;color:#ffb4c2;border-radius:30px;padding:7px 11px;font-size:10px;letter-spacing:1.3px;font-weight:800}.hero h2{font-size:clamp(27px,4vw,43px);max-width:640px;line-height:1.12;margin:20px 0 12px;letter-spacing:-1.2px}.hero h2 span{color:var(--red2)}.hero p{color:#b7aeb0;max-width:580px;font-size:14px;line-height:1.75;margin:0 0 23px}.btn{border:0;border-radius:11px;padding:12px 16px;font-weight:800;font-size:12px;display:inline-flex;align-items:center;gap:9px}.btn-red{background:var(--red);color:white;box-shadow:0 7px 22px #dc143c26}.btn-red:hover{background:#f31c46}.btn-ghost{background:#1b1b1b;color:#ddd;border:1px solid #343434}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:28px}.stat{border:1px solid var(--line);background:linear-gradient(145deg,#141414,#0f0f0f);border-radius:16px;padding:19px}.stat-head{display:flex;align-items:center;justify-content:space-between;color:#aaa;font-size:12px}.stat-icon{width:35px;height:35px;border-radius:11px;background:#2a0e16;color:#ff496a;display:grid;place-items:center;font-size:17px}.stat-value{font-size:26px;font-weight:850;margin-top:17px}.stat-foot{font-size:11px;color:#777;margin-top:5px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:25px 0 14px}.section-head h3{margin:0;font-size:18px}.section-head p{margin:5px 0 0;color:var(--muted);font-size:12px}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.feature{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:20px;display:flex;gap:15px;align-items:flex-start;transition:.2s}.feature:hover{border-color:#632033;transform:translateY(-2px)}.feature-icon{flex:0 0 45px;height:45px;border-radius:13px;background:#281017;color:#ff4c6c;display:grid;place-items:center;font-size:20px}.feature h4{margin:1px 0 7px;font-size:14px}.feature p{color:var(--muted);font-size:12px;line-height:1.55;margin:0 0 13px}.feature .mini{border:1px solid #3a2027;background:#1b1114;color:#ff9aae;border-radius:8px;padding:8px 10px;font-size:10px;font-weight:800}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}.page{display:none}.page.active{display:block;animation:fade .2s ease}@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.form-row{display:grid;gap:8px;margin:15px 0}.form-row label{font-size:12px;color:#c8c8c8}.form-row input,.form-row select,.form-row textarea{background:#090909;border:1px solid #333;border-radius:10px;color:#fff;padding:12px;outline:none;width:100%}.form-row input:focus,.form-row textarea:focus{border-color:var(--red)}.muted{color:var(--muted);font-size:12px;line-height:1.6}.notice{border:1px solid #54202d;background:#210d13;color:#f2b7c2;padding:13px 15px;border-radius:12px;font-size:12px;line-height:1.6;margin:15px 0}.empty{padding:25px;text-align:center;border:1px dashed #333;border-radius:14px;color:#888;font-size:13px}
+footer{margin-top:35px;border-top:1px solid var(--line);padding-top:18px;color:#666;font-size:11px;display:flex;justify-content:space-between;gap:12px}
+.mobilebar{display:none}.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);opacity:0;background:#202020;border:1px solid #444;color:white;border-radius:12px;padding:12px 17px;font-size:12px;transition:.25s;z-index:10;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:800px){.layout{display:block}aside{display:none}main{padding:23px 16px 95px}.topbar{margin-bottom:22px}.topbar .pill{display:none}.hero{border-radius:18px}.stats{gap:9px}.stat{padding:13px}.stat-value{font-size:22px}.stat-head{font-size:10px}.stat-icon{width:29px;height:29px}.cards{grid-template-columns:1fr}.mobilebar{display:flex;position:fixed;z-index:5;bottom:0;left:0;right:0;padding:9px 8px calc(9px + env(safe-area-inset-bottom));background:#0b0b0bf2;backdrop-filter:blur(18px);border-top:1px solid #282828;justify-content:space-around}.mobilebar button{border:0;background:transparent;color:#888;display:grid;gap:4px;justify-items:center;font-size:9px;min-width:53px}.mobilebar button span{font-size:18px}.mobilebar button.active{color:#ff4264}.section-head{align-items:start}footer{font-size:10px}.topbar h1{font-size:25px}}
+@media(max-width:380px){.stats{grid-template-columns:1fr}.stat{display:flex;align-items:center;gap:12px}.stat-value{margin:0 auto 0 0}.stat-foot{display:none}.stat-head{flex-direction:column;align-items:start}.stat-icon{order:-1}}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside>
+  <div class="brand"><div class="brandmark">R</div><div><strong>REDPANEL</strong><small>CONTROL CENTER</small></div></div>
+  <div><div class="section-label">MENU UTAMA</div><nav class="nav" id="sideNav">
+    <button class="active" data-page="dashboard"><span class="ico">▦</span>Dashboard</button>
+    <button data-page="domains"><span class="ico">◎</span>Domain Tools</button>
+    <button data-page="instagram"><span class="ico">▣</span>Instagram Tools</button>
+    <button data-page="account"><span class="ico">♙</span>Account</button>
+    <button data-page="admin"><span class="ico">⚙</span>Admin Panel</button>
+  </nav></div>
+  <div class="side-bottom"><div class="online"><span class="dot"></span> Interface Ready</div><p>RedPanel web interface<br>Dark mode · Crimson edition</p></div>
+</aside>
+<main>
+  <header class="topbar"><div><div class="eyebrow">CONTROL CENTER / WEB</div><h1 id="pageTitle">Dashboard</h1></div><div class="top-actions"><div class="pill">● SYSTEM INTERFACE</div><div class="avatar">R</div></div></header>
+
+  <section class="page active" id="dashboard">
+    <div class="hero"><div class="tag"><span>●</span> REDPANEL INTERFACE</div><h2>YOUR TOOLS.<br><span>ONE CONTROL CENTER.</span></h2><p>Panel web dengan tema gelap dan aksen merah, mengikuti identitas visual file yang kamu berikan. Navigasi dibuat responsif untuk layar HP dan desktop.</p><button class="btn btn-red" onclick="go('domains')">Explore tools <span>↗</span></button> <button class="btn btn-ghost" onclick="go('account')">Account settings</button></div>
+    <div class="stats">
+      <div class="stat"><div class="stat-head"><span>INTERFACE</span><span class="stat-icon">▦</span></div><div class="stat-value">READY</div><div class="stat-foot">Web UI loaded locally</div></div>
+      <div class="stat"><div class="stat-head"><span>THEME</span><span class="stat-icon">◈</span></div><div class="stat-value">DARK</div><div class="stat-foot">Black · Crimson red</div></div>
+      <div class="stat"><div class="stat-head"><span>LAYOUT</span><span class="stat-icon">▣</span></div><div class="stat-value">RESP.</div><div class="stat-foot">Mobile and desktop</div></div>
+    </div>
+    <div class="section-head"><div><h3>Quick Access</h3><p>Pilih halaman untuk membuka fiturnya.</p></div></div>
+    <div class="cards">
+      <article class="feature"><div class="feature-icon">◎</div><div><h4>Domain Tools</h4><p>Form antarmuka untuk memasukkan domain. Pemeriksaan nyata memerlukan API backend yang sah.</p><button class="mini" onclick="go('domains')">OPEN DOMAIN TOOLS ↗</button></div></article>
+      <article class="feature"><div class="feature-icon">▣</div><div><h4>Instagram Tools</h4><p>Halaman tools dengan form URL publik. Integrasi layanan belum terhubung.</p><button class="mini" onclick="go('instagram')">OPEN INSTAGRAM ↗</button></div></article>
+      <article class="feature"><div class="feature-icon">♙</div><div><h4>Account Settings</h4><p>Pengaturan tampilan akun dan form ganti password demo.</p><button class="mini" onclick="go('account')">OPEN ACCOUNT ↗</button></div></article>
+      <article class="feature"><div class="feature-icon">⚙</div><div><h4>Admin Panel</h4><p>Kerangka UI admin. Aksi admin sungguhan harus dilindungi autentikasi server.</p><button class="mini" onclick="go('admin')">OPEN ADMIN ↗</button></div></article>
+    </div>
+  </section>
+
+  <section class="page" id="domains">
+    <div class="section-head"><div><h3>Domain Tools</h3><p>Masukkan nama domain untuk menyiapkan permintaan pemeriksaan.</p></div></div>
+    <div class="panel"><div class="form-row"><label for="domainInput">DOMAIN NAME</label><input id="domainInput" placeholder="contoh.com" autocomplete="url"></div><button class="btn btn-red" onclick="domainDemo()">CHECK DOMAIN ↗</button><div id="domainResult" class="notice" hidden></div><p class="muted">Catatan: halaman ini hanya menyediakan antarmuka. Hasil DNS/WHOIS nyata membutuhkan backend atau API resmi.</p></div>
+  </section>
+
+  <section class="page" id="instagram">
+    <div class="section-head"><div><h3>Instagram Tools</h3><p>Antarmuka URL untuk konten yang boleh kamu akses.</p></div></div>
+    <div class="panel"><div class="form-row"><label for="igUrl">POST / REEL URL</label><input id="igUrl" type="url" placeholder="https://www.instagram.com/..."></div><button class="btn btn-red" onclick="instagramDemo()">PROCESS URL ↗</button><div id="igResult" class="notice" hidden></div><p class="muted">Demo UI saja. Tidak mengambil konten atau meminta kata sandi Instagram. Gunakan fitur resmi dan konten yang kamu punya izin untuk akses.</p></div>
+  </section>
+
+  <section class="page" id="account">
+    <div class="section-head"><div><h3>Account Settings</h3><p>Pengaturan lokal untuk tampilan demo ini.</p></div></div>
+    <div class="panel"><div class="form-row"><label for="displayName">DISPLAY NAME</label><input id="displayName" value="RedPanel User" maxlength="40"></div><button class="btn btn-red" onclick="saveName()">SAVE DISPLAY NAME</button><hr style="border:0;border-top:1px solid #292929;margin:23px 0"><h3 style="font-size:15px">Change Password</h3><div class="notice">Form demo ini tidak mengubah password akun server. Hubungkan ke endpoint autentikasi milikmu sebelum digunakan sungguhan.</div><div class="form-row"><label for="newPass">NEW PASSWORD</label><input id="newPass" type="password" placeholder="Minimal 8 karakter"></div><div class="form-row"><label for="confirmPass">CONFIRM PASSWORD</label><input id="confirmPass" type="password" placeholder="Ulangi password"></div><button class="btn btn-ghost" onclick="passwordDemo()">VALIDATE FORM</button><div id="passResult" class="notice" hidden></div></div>
+  </section>
+
+  <section class="page" id="admin">
+    <div class="section-head"><div><h3>Admin Panel</h3><p>Kerangka tampilan administrasi.</p></div></div>
+    <div class="notice">Mode preview: belum ada backend autentikasi atau database. Jangan gunakan kontrol admin pada halaman statis sebagai sistem keamanan.</div>
+    <div class="cards">
+      <article class="feature"><div class="feature-icon">♙</div><div><h4>User Management</h4><p>Area daftar pengguna akan muncul setelah API admin terhubung.</p><button class="mini" onclick="toast('Backend admin belum terhubung.')">VIEW USERS</button></div></article>
+      <article class="feature"><div class="feature-icon">◷</div><div><h4>System Activity</h4><p>Log aktivitas membutuhkan penyimpanan server.</p><button class="mini" onclick="toast('Belum ada log dari server.')">VIEW LOGS</button></div></article>
+    </div>
+  </section>
+  <footer><span>REDPANEL · WEB INTERFACE</span><span>BLACK / CRIMSON · PREVIEW BUILD</span></footer>
+</main>
+</div>
+<nav class="mobilebar" id="mobileNav">
+  <button class="active" data-page="dashboard"><span>▦</span>Home</button>
+  <button data-page="domains"><span>◎</span>Domain</button>
+  <button data-page="instagram"><span>▣</span>Instagram</button>
+  <button data-page="account"><span>♙</span>Account</button>
+  <button data-page="admin"><span>⚙</span>Admin</button>
+</nav>
+<div class="toast" id="toast"></div>
+<script>
+const titles={dashboard:'Dashboard',domains:'Domain Tools',instagram:'Instagram Tools',account:'Account Settings',admin:'Admin Panel'};
+function go(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===page));document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));document.getElementById('pageTitle').textContent=titles[page]||'Dashboard';window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
+let toastTimer;function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2600)}
+function domainDemo(){const v=document.getElementById('domainInput').value.trim();const r=document.getElementById('domainResult');r.hidden=false;if(!v||!v.includes('.')||/\s/.test(v)){r.textContent='Masukkan nama domain yang valid, misalnya contoh.com.';return}r.textContent='Domain "'+v+'" diterima di form demo. Hasil DNS/WHOIS belum tersedia karena backend belum dihubungkan.'}
+function instagramDemo(){const v=document.getElementById('igUrl').value.trim();const r=document.getElementById('igResult');r.hidden=false;try{const u=new URL(v);if(!['instagram.com','www.instagram.com'].includes(u.hostname)){r.textContent='Gunakan URL dari instagram.com.';return}r.textContent='URL berhasil divalidasi untuk demo. Tidak ada konten yang diunduh; integrasi resmi belum dihubungkan.'}catch(e){r.textContent='Masukkan URL lengkap yang valid.'}}
+function saveName(){const n=document.getElementById('displayName').value.trim();if(!n){toast('Nama tidak boleh kosong.');return}localStorage.setItem('redpanel_display_name',n);document.querySelector('.avatar').textContent=n.slice(0,1).toUpperCase();toast('Nama tampilan disimpan di browser.')}
+function passwordDemo(){const p=document.getElementById('newPass').value,c=document.getElementById('confirmPass').value,r=document.getElementById('passResult');r.hidden=false;if(p.length<8){r.textContent='Password demo harus memiliki minimal 8 karakter.'}else if(p!==c){r.textContent='Konfirmasi password belum cocok.'}else{r.textContent='Validasi form berhasil. Password belum diubah karena backend belum terhubung.'}}
+const saved=localStorage.getItem('redpanel_display_name');if(saved){document.getElementById('displayName').value=saved;document.querySelector('.avatar').textContent=saved.slice(0,1).toUpperCase()}
+</script>
+</body></html>
